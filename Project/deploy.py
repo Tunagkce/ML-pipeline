@@ -28,6 +28,30 @@ def main():
 
     # Input fields
     st.subheader("Please fill in the customer information:")
+    age = st.number_input("Age", min_value=0, max_value=100, step=1)
+    job = st.selectbox('Job', (
+        'entrepreneur', 'housemaid', 'management',
+        'retired', 'self-employed', 'services',  'blue-collar', 'student', 'technician', 'admin.','unemployed'))
+    marital = st.selectbox('Marital Status', ('married', 'single', 'divorced'))
+    education = st.selectbox('Education', (
+        'basic.6y', 'basic.9y', 'high.school',
+        'illiterate', 'professional.course', 'university.degree','basic.4y'))
+    default = st.selectbox('Has Credit in Default?', ('no', 'yes'))
+    housing = st.selectbox('Has Housing Loan?', ('no', 'yes'))
+    loan = st.selectbox('Has Personal Loan?', ('no', 'yes'))
+    contact = st.selectbox('Contact Communication Type', ('cellular', 'telephone'))
+    month = st.selectbox('Last Contact Month', ('apr', 'aug', 'dec', 'jul', 'jun', 'mar', 'may', 'nov', 'oct', 'sep'))
+    day_of_week = st.selectbox('Last Contact Day', ('mon', 'tue', 'wed', 'thu', 'fri'))
+    duration = st.number_input("Last Contact Duration (seconds)", step=1)
+    campaign = st.number_input("Number of Contacts Per Campaign", step=1)
+    pdays = st.number_input("Days Passed Since Last Contact (-1 if never)", step=1)
+    previous = st.number_input("Number of Contacts Before Campaign", step=1)
+    poutcome = st.selectbox('Outcome of Previous Campaign', ('failure', 'nonexistent', 'success'))
+    emp_var_rate = st.number_input("Employment Variation Rate")
+    cons_price_idx = st.number_input("Consumer Price Index")
+    cons_conf_idx = st.number_input("Consumer Confidence Index")
+    euribor3m = st.number_input("Euribor 3 Month Rate")
+    nr_employed = st.number_input("Number of Employees")
    
 if __name__ == '__main__':
     main()
