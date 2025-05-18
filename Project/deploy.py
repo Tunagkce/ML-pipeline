@@ -52,6 +52,10 @@ def main():
     cons_conf_idx = st.number_input("Consumer Confidence Index")
     euribor3m = st.number_input("Euribor 3 Month Rate")
     nr_employed = st.number_input("Number of Employees")
+
+    # was_contacted_before derived from pdays
+    was_contacted_before_input = st.selectbox("Was Contacted Before?", ['yes', 'no'])
+    was_contacted_before = 1 if was_contacted_before_input == 'yes' else 0
    
 if __name__ == '__main__':
     main()
