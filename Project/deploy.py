@@ -1,4 +1,3 @@
-
 import streamlit as st
 import os
 import pickle
@@ -17,7 +16,6 @@ def make_prediction(features):
     return prediction_value
 
 
-# main streamlit app
 def main():
     # UI banner
     html_temp = """ 
@@ -27,16 +25,15 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    # Input fields
     st.subheader("Please fill in the customer information:")
     age = st.number_input("Age", min_value=0, max_value=100, step=1)
     job = st.selectbox('Job', (
         'entrepreneur', 'housemaid', 'management',
-        'retired', 'self-employed', 'services',  'blue-collar', 'student', 'technician', 'admin.','unemployed'))
+        'retired', 'self-employed', 'services', 'blue-collar', 'student', 'technician', 'admin.', 'unemployed'))
     marital = st.selectbox('Marital Status', ('married', 'single', 'divorced'))
     education = st.selectbox('Education', (
         'basic.6y', 'basic.9y', 'high.school',
-        'illiterate', 'professional.course', 'university.degree','basic.4y'))
+        'illiterate', 'professional.course', 'university.degree', 'basic.4y'))
     default = st.selectbox('Has Credit in Default?', ('no', 'yes'))
     housing = st.selectbox('Has Housing Loan?', ('no', 'yes'))
     loan = st.selectbox('Has Personal Loan?', ('no', 'yes'))
@@ -53,44 +50,40 @@ def main():
     cons_conf_idx = st.number_input("Consumer Confidence Index")
     euribor3m = st.number_input("Euribor 3 Month Rate")
     nr_employed = st.number_input("Number of Employees")
+    was_contacted_before_input = st.selectbox("Was Contacted Before?", ['yes', 'no'])
+    was_contacted_before = 1 if was_contacted_before_input == 'yes' else 0
 
+    if st.button("Predict"):
+        features = pd.DataFrame({
+            'age': [age],
+            'job': [job],
+            'marital': [marital],
+            'education': [education],
+            'default': [default],
+            'housing': [housing],
+            'loan': [loan],
+            'contact': [contact],
+            'month': [month],
+            'day_of_week': [day_of_week],
+            'duration': [duration],
+            'campaign': [campaign],
+            'pdays': [pdays],
+            'previous': [previous],
+            'poutcome': [poutcome],
+            'emp.var.rate': [emp_var_rate],
+            'cons.price.idx': [cons_price_idx],
+            'cons.conf.idx': [cons_conf_idx],
+            'euribor3m': [euribor3m],
+            'nr.employed': [nr_employed],
+            'was_contacted_before': [was_contacted_before]
+        })
 
- # When 'Predict' button is clicked
-if st.button("Predict"):
-    # Create input DataFrame
-    features = pd.DataFrame({
-        'age': [age],
-        'job': [job],
-        'marital': [marital],
-        'education': [education],
-        'default': [default],
-        'housing': [housing],
-        'loan': [loan],
-        'contact': [contact],
-        'month': [month],
-        'day_of_week': [day_of_week],
-        'duration': [duration],
-        'campaign': [campaign],
-        'pdays': [pdays],
-        'previous': [previous],
-        'poutcome': [poutcome],
-        'emp.var.rate': [emp_var_rate],
-        'cons.price.idx': [cons_price_idx],
-        'cons.conf.idx': [cons_conf_idx],
-        'euribor3m': [euribor3m],
-        'nr.employed': [nr_employed],
-        'was_contacted_before': [was_contacted_before]
-    })
+        result = make_prediction(features)
 
-   
-    result = make_prediction(features)
-
-    # Show results
-    if result == 1:
-        st.success(f"Prediction: YES")
-    else:
-        st.error(f"Prediction: NO")
-
+        if result == 1:
+            st.success("Prediction: YES")
+        else:
+            st.error("Prediction: NO")
 
 if __name__ == '__main__':
     main()
