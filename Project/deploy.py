@@ -2,6 +2,7 @@
 import streamlit as st
 import os
 import pickle
+import pandas as pd
 
 # Get absolute path to current script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
