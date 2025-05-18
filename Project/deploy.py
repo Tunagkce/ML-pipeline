@@ -12,9 +12,10 @@ with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 
 def make_prediction(features):
-    prediction_value = model.predict(features)[0]
-    return prediction_value
-
+    prediction = model.predict(features)[0]
+    proba = model.predict_proba(features)[0]
+    confidence = proba[prediction] * 100  # Get probability of the predicted class
+    return prediction, confidence
 
 def main():
     # UI banner
@@ -75,12 +76,17 @@ def main():
             'nr.employed': [nr_employed],
         })
 
-        result = make_prediction(features)
+        result, confidence = make_prediction(features)
 
         if result == 1:
-            st.success("Prediction: YES")
+            st.success(f"Prediction: YES – Customer likely to subscribe.")
         else:
-            st.error("Prediction: NO")
+            st.error(f"Prediction: NO – Customer unlikely to subscribe.")
+
+        st.info(f"Model Confidence: {confidence:.2f}%")
+
+        # Optional: Visual confidence bar
+        st.progress(min(confidence / 100, 1.0))
 
 if __name__ == '__main__':
     main()
