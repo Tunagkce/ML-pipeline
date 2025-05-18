@@ -3,5 +3,6 @@ import pickle
 import pandas as pd
 
 st.set_page_config(page_title="Deposit Prediction App", layout="wide", page_icon="🏦")
-model=pickle.load(open('bank_marketing.sav','rb'))
+with open('bank_marketing.sav', 'rb') as f:
+    model = pickle.load(f)
 
