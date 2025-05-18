@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 
 st.set_page_config(page_title="Deposit Prediction App", layout="wide", page_icon="🏦")
-
+model=pickle.load(open('Project/bank_marketing.sav','rb'))
 # this is the main function in which we define our webpage  
 def main():
     # front end elements of the web page 
