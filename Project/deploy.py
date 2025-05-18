@@ -52,7 +52,11 @@ def main():
     cons_conf_idx = st.number_input("Consumer Confidence Index")
     euribor3m = st.number_input("Euribor 3 Month Rate")
     nr_employed = st.number_input("Number of Employees")
-    
+
+    # was_contacted_before derived from pdays
+    was_contacted_before_input = st.selectbox("Was Contacted Before?", ['yes', 'no'])
+    was_contacted_before = 1 if was_contacted_before_input == 'yes' else 0
+
     # When 'Predict' button is clicked
     if st.button("Predict"):
         # Create input DataFrame
@@ -76,15 +80,17 @@ def main():
             'cons.price.idx': [cons_price_idx],
             'cons.conf.idx': [cons_conf_idx],
             'euribor3m': [euribor3m],
-            'nr.employed': [nr_employed]
+            'nr.employed': [nr_employed],
+            'was_contacted_before': [was_contacted_before]
         })
+
     result = make_prediction(features)
+
     # Show results
     if result == 1:
         st.success(f"Prediction: YES")
     else:
         st.error(f"Prediction: NO")
-        
-   
+
 if __name__ == '__main__':
     main()
