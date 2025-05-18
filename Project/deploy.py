@@ -80,10 +80,10 @@ def main():
         })
     result = make_prediction(features)
     # Show results
-        if result == 1:
-            st.success(f"Prediction: YES")
-        else:
-            st.error(f"Prediction: NO")
+    if result == 1:
+        st.success(f"Prediction: YES")
+    else:
+        st.error(f"Prediction: NO")
         
    
 if __name__ == '__main__':
