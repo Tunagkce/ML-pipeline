@@ -76,10 +76,15 @@ def main():
             'cons.price.idx': [cons_price_idx],
             'cons.conf.idx': [cons_conf_idx],
             'euribor3m': [euribor3m],
-            'nr.employed': [nr_employed],
-            'was_contacted_before': [was_contacted_before]
+            'nr.employed': [nr_employed]
         })
-   
+    result = make_prediction(features)
+    # Show results
+        if result == 1:
+            st.success(f"Prediction: YES")
+        else:
+            st.error(f"Prediction: NO")
+        
    
 if __name__ == '__main__':
     main()
