@@ -50,8 +50,6 @@ def main():
     cons_conf_idx = st.number_input("Consumer Confidence Index")
     euribor3m = st.number_input("Euribor 3 Month Rate")
     nr_employed = st.number_input("Number of Employees")
-    was_contacted_before_input = st.selectbox("Was Contacted Before?", ['yes', 'no'])
-    was_contacted_before = 1 if was_contacted_before_input == 'yes' else 0
 
     if st.button("Predict"):
         features = pd.DataFrame({
@@ -75,7 +73,6 @@ def main():
             'cons.conf.idx': [cons_conf_idx],
             'euribor3m': [euribor3m],
             'nr.employed': [nr_employed],
-            'was_contacted_before': [was_contacted_before]
         })
 
         result = make_prediction(features)
