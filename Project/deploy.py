@@ -85,7 +85,7 @@ def main():
 
         st.info(f"Model Confidence: {confidence:.2f}%")
 
-        # Optional: Visual confidence bar
+     
         st.progress(min(confidence / 100, 1.0))
 
 if __name__ == '__main__':
