@@ -5,7 +5,7 @@ import pandas as pd
 
 # Get absolute path to current script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, 'bank_marketing.sav')
+MODEL_PATH = os.path.join(BASE_DIR, 'prediction_deploy.sav')
 
 # Load the model safely
 with open(MODEL_PATH, 'rb') as f:
